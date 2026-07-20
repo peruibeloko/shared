@@ -1,9 +1,14 @@
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+  rel="stylesheet"
+/>
 
 <div class="code-snippet">
   <pre><code></code></pre>
   <div class="right">
-    <button type="button"><span class="material-symbols-outlined">content_copy</span></button>
+    <button type="button" title="Copy to clipboard">
+      <span class="material-symbols-outlined">content_copy</span>
+    </button>
   </div>
 </div>
 
@@ -49,16 +54,27 @@
       border-top-right-radius: 0.5rem;
 
       button {
-        padding: 1rem;
-        margin: 0;
+        --bgc: var(--background_color);
+        cursor: pointer;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        margin: 0.5rem;
 
         border: none;
-        background-color: var(--background_color);
+        background-color: hsl(from var(--bgc) h s calc(l * 0.8));
         color: var(--button_color);
+        
+        border-radius: 0.5rem;
+        
+        &.check {
+          --bgc: var(--orange_dim);
+          color: var(--fg)
+        }
 
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 0.5rem;
+        &:hover {
+          background-color: hsl(from var(--bgc) h s calc(l * 0.7));
+        }
       }
     }
   }

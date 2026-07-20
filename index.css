@@ -19,6 +19,7 @@ code-snippet {
 body {
   max-width: 40rem;
   margin: auto;
+  margin-bottom: var(--size__4);
   font-family: var(--font__body);
   font-weight: 300;
 }

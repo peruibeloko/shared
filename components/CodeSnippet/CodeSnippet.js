@@ -28,9 +28,21 @@ class CodeSnippet extends HTMLElement {
     // register click handler
 
     const copyButton = template.querySelector('button');
+    if (!copyButton) return;
+    
+    const label = copyButton?.querySelector('span');
+    if (!label) return;
 
-    copyButton?.addEventListener('click', () => {
+    copyButton.addEventListener('click', () => {
       navigator.clipboard.writeText(sourceCode);
+      copyButton.classList.add('check');
+      const prevText = label.innerText;
+      label.innerText = 'check';
+      
+      setTimeout(() => {
+        copyButton.classList.remove('check')
+        label.innerText = prevText;
+      }, 1000);
     });
 
     for (const child of template.children) {
