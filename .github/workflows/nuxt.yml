@@ -11,25 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v7.0.1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v6.0.9
         with:
           version: latest
 
       - name: Setup Node
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v7.0.0
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
 
-      - name: Install dependencies and run build
-        run: |
-          pnpm install
-          pnpm run generate --preset github_pages
+      - name: Install dependencies
+        run: pnpm install
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.6.1
+      - name: Run build
+        run: pnpm run generate --preset github_pages
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
-          folder: .output/public
+          path: './.output/public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5.0.0
